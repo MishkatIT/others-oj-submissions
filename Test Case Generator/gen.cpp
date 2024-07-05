@@ -14,8 +14,8 @@ mt19937_64 rnd(chrono::steady_clock::now().time_since_epoch().count());
 void generate(int currentNum) {
     string folder = "testcases/";
     ofstream inFile(folder + to_string(currentNum) + ".in");
-    ofstream ansFile(folder + to_string(currentNum) + ".ans");
-    ofstream outFile(folder + to_string(currentNum) + ".out");
+    // ofstream ansFile(folder + to_string(currentNum) + ".ans");
+    // ofstream outFile(folder + to_string(currentNum) + ".out");
 
     int n = N;
     vector<int> v(n);
@@ -26,8 +26,8 @@ void generate(int currentNum) {
     inFile << '\n';
 
     inFile.close();
-    ansFile.close();
-    outFile.close();
+    // ansFile.close();
+    // outFile.close();
 }
 
 int32_t main() {
