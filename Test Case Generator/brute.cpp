@@ -27,38 +27,9 @@ int main() {
 
         ofstream ansFile(folder + to_string(fileNum) + ".ans");
 
-        int n, k, m;
-        inFile >> n >> k >> m;
-        vector<string> lan(n);
-        for (auto& i : lan) inFile >> i;
-        vector<int> cost(n);
-        for (auto& i : cost) inFile >> i;
-        for (int i = 0; i < k; i++) {
-            int len;
-            inFile >> len;
-            vector<int> temp(len);
-            for (auto& val : temp) {
-                inFile >> val;
-            }
-            int mn = inf;
-            for (auto& x : temp) {
-                mn = min(mn, cost[x - 1]);
-            }
-            for (auto& x : temp) {
-                cost[x - 1] = mn;
-            }
-        }
-        map<string, int> mp;
-        for (int i = 0; i < n; i++) {
-            mp[lan[i]] = cost[i];
-        }
-        ll ans = 0;
-        for (int i = 0; i < m; i++) {
-            string x;
-            inFile >> x;
-            ans += mp[x];
-        }
-        ansFile << ans << '\n';
+        int n;
+        inFile >> n;
+        ansFile << n << '\n';
 
         inFile.close();
         ansFile.close();
