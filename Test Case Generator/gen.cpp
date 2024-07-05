@@ -33,7 +33,7 @@ void generate(int currentNum) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int testCase = rnd() % 15;
+    int testCase = rnd() % 15 + 1;
     for (int t = 0; t < testCase; t++) {
         generate(t + 10);
     }
