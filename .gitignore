@@ -1,0 +1,17 @@
+# Exclude everything
+*
+
+# Include all directories except those with 'codeforces' in their name
+!*/
+
+# Exclude directories with 'codeforces' in their name
+codeforces*/
+*codeforces*/
+
+# Include only .cpp files in included directories
+!*.cpp
+!.gitignore
+
+# Exclude .vscode and tst folders
+.vscode/
+tst/
