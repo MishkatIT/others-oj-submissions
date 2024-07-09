@@ -27,9 +27,17 @@ int main() {
 
         ofstream ansFile(folder + to_string(fileNum) + ".ans");
 
+
+
+
+        // modify from here
         int n;
         inFile >> n;
         ansFile << n << '\n';
+        // end of modifications
+
+
+
 
         inFile.close();
         ansFile.close();
