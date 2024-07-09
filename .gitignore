@@ -11,6 +11,7 @@ codeforces*/
 # Include only .cpp files in included directories
 !*.cpp
 !.gitignore
+!*.py
 
 # Exclude .vscode and tst folders
 .vscode/
