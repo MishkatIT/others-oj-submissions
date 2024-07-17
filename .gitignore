@@ -16,3 +16,4 @@ codeforces*/
 # Exclude .vscode and tst folders
 .vscode/
 tst/
+tempCodeRunnerFile.cpp
