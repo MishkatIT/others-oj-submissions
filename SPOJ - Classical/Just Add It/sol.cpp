@@ -20,9 +20,6 @@ const ll linf = 1e18;
 
 
 const int mod = 10000007;
-const int mod = 1e9 + 7;
-
-const int mod = 1e9 + 7;
 
 void modNormalize(ll &x) { x %= mod; if (x < 0) x += mod; }
 
@@ -34,7 +31,7 @@ ll modPower(ll base, ll exponent) { ll r = 1; while (exponent) { if (exponent & 
 ll modInverse(ll x) { return modPower(x, mod - 2); }  // if mod is prime.
 ll modDivide(ll x, ll y) { return modMultiply(x, modInverse(y)); }
 
-ll modPower(ll base, ll exponent) { ll r = 1; while (exponent) { if (exponent & 1) r = modMultiply(r, base); base = modMultiply(base, base); exponent >>= 1; } return r; }
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -45,10 +42,12 @@ int main() {
         if (n == k && n == 0) break;
         ll sum = 0;
         n--;
-        sum = modPower(n, k) + modPower(n, k);
-        sum *= 2;
+        sum = modAdd(sum, modPower(n, k));
+        sum = modAdd(sum, modPower(n, n));
+        sum = modAdd(sum, sum);
         n++;
-        sum = modPower(n, k) + modPower(n, k);
+        sum = modAdd(sum, modPower(n, k));
+        sum = modAdd(sum, modPower(n, n));
         cout << sum << '\n';
     }
     return 0;
