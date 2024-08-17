@@ -1,6 +1,6 @@
 /*
     Author    : MishkatIT
-    Created   : Friday 09-08-2024 19:59:56
+    Created   : Saturday 17-08-2024 01:14:49
 */
 
 #include <bits/stdc++.h>
@@ -28,16 +28,23 @@ int main() {
     while (tc--) {
         int n;
         cin >> n;
-        vector<int> v(n);
+        vector<ll> v(n);
         for (auto& i : v) {
             cin >> i;
         }
-        sort(v.begin(), v.end());
-        int ans = 0;
-        for (int i = 0; i < n - 1; i++) {
-            ans |= v[i];
+        bool ok = (n <= 60);
+        if (ok) {
+            set<ll> s;
+            for (int i = 0; i < n; i++) {
+                ll cur = 0;
+                for (int j = i; j < n; j++) {
+                    cur |= v[j];
+                    s.insert(cur);
+                }
+            }
+            if ((int)s.size() != n * (n + 1) / 2) ok = false;
         }
-        cout << (ans != v.back() ? "YES" : "NO") << '\n';
+        cout << (ok ? "YES" : "NO") << '\n';
     }
     return 0;
 }
