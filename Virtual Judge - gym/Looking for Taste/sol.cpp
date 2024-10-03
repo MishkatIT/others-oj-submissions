@@ -1,6 +1,6 @@
 /*
     Author    : MishkatIT
-    Created   : Wednesday 17-07-2024 02:33:41
+    Created   : Friday 27-09-2024 16:42:42
 */
 
 #include <bits/stdc++.h>
@@ -19,28 +19,23 @@ const int N = 2e5 + 10;
 const int inf = 1e9;
 const ll linf = 1e18;
 
-
-
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
+    freopen("looking.in", "r", stdin);
     int tc;
     cin >> tc;
     while (tc--) {
-        string x = "abcdefghijklmnopqrstuvwxyz";
-        string p;
-        cin >> p;
-        bool ok = true;
-        int idx = p.front() - 'a';
-        for (auto& c : p) {
-            if (c != x[idx % 26]) {
-                ok = false;
-                break;
-            }
-            idx++;
+        int n, k;
+        cin >> n >> k;
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            int x;
+            cin >> x;
+            ans |= x;
         }
-        cout << (ok ? "YES" : "NO") << '\n';
+        cout << ans << '\n';
     }
     return 0;
 }

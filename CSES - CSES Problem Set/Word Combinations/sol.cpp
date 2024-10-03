@@ -1,6 +1,6 @@
 /*
     Author    : MishkatIT
-    Date      : 2024-09-19
+    Created   : Wednesday 25-09-2024 21:36:31
 */
 
 #include <bits/stdc++.h>
@@ -13,42 +13,75 @@ using namespace std;
 #endif
 
 using ll = long long;
-const double eps = 1e-9;
+using ld = long double;
+const int mod = 1e9 + 7;
+const int N = 2e5 + 10;
+const int inf = 1e9;
+const ll linf = 1e18;
+
+class TrieNode {
+public:
+    bool isEnd;
+    TrieNode* child[26];
+    TrieNode() {
+        isEnd = false;
+        fill(begin(child), end(child), nullptr);
+    }
+};
+
+class Trie {
+public:
+    TrieNode* root;
+    Trie() {
+        root = new TrieNode;
+    }
+
+    int getIdx(char c) {
+        return c - 'a';
+    }
+
+    void insert(string& str) {
+        TrieNode* node = root;
+        for (auto& c : str) {
+            int idx = getIdx(c);
+            if (!node->child[idx]) {
+                node->child[idx] = new TrieNode;
+            }
+            node = node->child[idx];
+        }
+        node->isEnd = true;
+    }
+};
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    int n, k;
-    cin >> n >> k;
-    
-    vector<vector<int>> sheets(n, vector<int>(k));
-    map<int, vector<int>> numToPlayers;
-    
-    // Read the input sheets
-    for (int i = 0; i < n; ++i) {
-        for (auto(& j) : sheets[i]) {
-            cin >> j;
-            numToPlayers[j].push_back(i);
+
+    string str;
+    cin >> str;
+    Trie trie;
+    int k;
+    cin >> k;
+    for (int i = 0; i < k; i++) {
+        string x;
+        cin >> x;
+        trie.insert(x);
+    }
+    int n = str.size();
+    vector<int> dp(n + 5);
+    dp[n] = 1;
+    for (int i = n - 1; i >= 0; i--) {
+        TrieNode* node = trie.root;
+        for (int j = i; j < n; j++) {
+            int idx = trie.getIdx(str[j]);
+            if (!node->child[idx]) break;
+            node = node->child[idx];
+            if (node->isEnd) {
+                dp[i] += dp[j + 1] % mod;
+                dp[i] %= mod;
+            }
         }
     }
-    
-    vector<double> lastProb(n, 0.0);
-    
-    // For each number in numToPlayers map, compute the probabilities
-    for (auto(& entry) : numToPlayers) {
-        auto& players = entry.second;
-        int totalPlayers = players.size();
-        for (int i = 0; i < totalPlayers; ++i) {
-            lastProb[players[i]] += 1.0 / totalPlayers;
-        }
-    }
-    
-    // Normalize to make sure probabilities sum to 1
-    double sum = accumulate(lastProb.begin(), lastProb.end(), 0.0);
-    for (auto(& prob) : lastProb) {
-        printf("%.9f\n", prob / sum);
-    }
-    
+    cout << dp[0] << '\n';
     return 0;
 }
